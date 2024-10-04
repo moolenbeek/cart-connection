@@ -13,6 +13,7 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
+		"@lucia-auth/adapter-drizzle": "^1.1.0",
 		"@vercel/postgres": "^0.10.0",
 		"dotenv": "^16.4.5",
 		"drizzle-orm": "^0.33.0",
