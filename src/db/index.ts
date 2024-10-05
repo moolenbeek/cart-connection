@@ -1,6 +1,11 @@
-import { config } from "dotenv";
-import { drizzle } from "drizzle-orm/postgres-js";
-import { sql } from "@vercel/postgres";
+import { POSTGRES_URL } from "$env/static/private";
+import { drizzle } from "drizzle-orm/node-postgres";
+import pg from "pg";
+const pool = new pg.Pool({
+  connectionString: POSTGRES_URL,
+});
 
-config({ path: ".env" });
-export const db = drizzle(sql);
+await pool.connect();
+const db = drizzle(pool);
+
+export default db;
