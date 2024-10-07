@@ -2,7 +2,12 @@
 	import { Button } from "$lib/components/ui/button";
 	import { Sun, Moon, ShoppingCart, User, LogOut } from "lucide-svelte";
 	import { Avatar, AvatarFallback, AvatarImage } from "$lib/components/ui/avatar";
-	import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "$lib/components/ui/dropdown-menu";
+	import {
+		DropdownMenu,
+		DropdownMenuContent,
+		DropdownMenuItem,
+		DropdownMenuTrigger
+	} from "$lib/components/ui/dropdown-menu";
 	import { onMount } from "svelte";
 
 	export let user: any;
@@ -29,9 +34,7 @@
 			<a href="/" class="text-xl font-bold">website</a>
 			<div class="flex items-center space-x-4">
 				{#if !user}
-					<Button variant="secondary" size="sm" href="/login">
-						Login
-					</Button>
+					<Button variant="secondary" size="sm" href="/login">Login</Button>
 				{/if}
 				<Button variant="ghost" size="icon" on:click={toggleDarkMode}>
 					{#if isDarkMode}
@@ -40,7 +43,7 @@
 						<Moon class="h-[1.2rem] w-[1.2rem]" />
 					{/if}
 				</Button>
-				<Button variant="ghost" size="icon" on:click={() => window.location.href = '/cart'}>
+				<Button variant="ghost" size="icon" on:click={() => (window.location.href = "/cart")}>
 					<ShoppingCart class="h-[1.2rem] w-[1.2rem]" />
 				</Button>
 				{#if user}
@@ -57,15 +60,15 @@
 								<p class="text-muted-foreground">{user.email}</p>
 							</div>
 							<DropdownMenuItem>
-								<a href="/account" class="w-full text-sm flex items-center">
-										<User class="h-4 w-4 mr-2" />
-										Account
+								<a href="/account" class="flex w-full items-center text-sm">
+									<User class="mr-2 h-4 w-4" />
+									Account
 								</a>
 							</DropdownMenuItem>
 							<DropdownMenuItem>
 								<form action="/logout" method="POST" class="w-full">
-									<button type="submit" class="w-full text-left text-sm flex items-center">
-										<LogOut class="h-4 w-4 mr-2" />
+									<button type="submit" class="flex w-full items-center text-left text-sm">
+										<LogOut class="mr-2 h-4 w-4" />
 										Logout
 									</button>
 								</form>
