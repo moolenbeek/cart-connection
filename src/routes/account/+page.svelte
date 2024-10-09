@@ -1,5 +1,4 @@
 <script lang="ts">
-	export let data: { user: { firstName: string; lastName: string; email: string } };
 	import { Button } from "$lib/components/ui/button";
 	import {
 		Card,
@@ -11,6 +10,13 @@
 	} from "$lib/components/ui/card";
 	import { Input } from "$lib/components/ui/input";
 	import { Label } from "$lib/components/ui/label";
+	import { superForm } from "sveltekit-superforms";
+
+	export let data;
+	
+	const { user } = data;
+	const { form, errors, enhance } = superForm(user);
+	let formElement: HTMLFormElement;
 </script>
 
 <div class="container mx-auto py-10">
@@ -21,32 +27,52 @@
 				<CardTitle>Personal Information</CardTitle>
 				<CardDescription>Update your personal details here.</CardDescription>
 			</CardHeader>
-			<CardContent class="space-y-4">
-				<div class="grid grid-cols-2 gap-4">
-					<div class="space-y-2">
-						<Label for="firstName">First name</Label>
-						<Input id="firstName" placeholder="John" value={data.user.firstName} />
+			<form method="POST" use:enhance bind:this={formElement}>
+				<CardContent class="space-y-4">
+					<div class="grid grid-cols-2 gap-4">
+						<div class="space-y-2">
+							<Label for="firstName">First name</Label>
+							<Input
+								type="text"
+								id="firstName"
+								name="firstName"
+								placeholder="First Name"
+								bind:value={$form.firstName}
+								required
+							/>
+							{#if $errors.firstName}<p class="mt-1 text-sm text-red-500">{$errors.firstName}</p>{/if}
+						</div>
+						<div class="space-y-2">
+							<Label for="lastName">Last name</Label>
+							<Input
+								type="text"
+								id="lastName"
+								name="lastName"
+								placeholder="Last Name"
+								bind:value={$form.lastName}
+								required
+							/>
+							{#if $errors.lastName}<p class="mt-1 text-sm text-red-500">{$errors.lastName}</p>{/if}
+						</div>
 					</div>
 					<div class="space-y-2">
-						<Label for="lastName">Last name</Label>
-						<Input id="lastName" placeholder="Doe" value={data.user.lastName} />
+						<Label for="email">Email</Label>
+						<Input
+							type="email"
+							id="email"
+							name="email"
+							placeholder="Email"
+							bind:value={$form.email}
+							required
+						/>
+						{#if $errors.email}<p class="mt-1 text-sm text-red-500">{$errors.email}</p>{/if}
 					</div>
-				</div>
-				<div class="space-y-2">
-					<Label for="email">Email</Label>
-					<Input
-						id="email"
-						placeholder="john.doe@example.com"
-						type="email"
-						value={data.user.email}
-					/>
-				</div>
-			</CardContent>
-			<CardFooter>
-				<Button>Save Changes</Button>
-			</CardFooter>
+				</CardContent>
+				<CardFooter>
+					<Button type="submit">Save Changes</Button>
+				</CardFooter>
+			</form>
 		</Card>
-
 		<Card>
 			<CardHeader>
 				<CardTitle>Delete Account</CardTitle>
