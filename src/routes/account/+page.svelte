@@ -10,10 +10,11 @@
 	} from "$lib/components/ui/card";
 	import { Input } from "$lib/components/ui/input";
 	import { Label } from "$lib/components/ui/label";
+	import * as Dialog from "$lib/components/ui/dialog";
 	import { superForm } from "sveltekit-superforms";
 
 	export let data;
-	
+
 	const { user } = data;
 	const { form, errors, enhance } = superForm(user);
 	let formElement: HTMLFormElement;
@@ -40,7 +41,9 @@
 								bind:value={$form.firstName}
 								required
 							/>
-							{#if $errors.firstName}<p class="mt-1 text-sm text-red-500">{$errors.firstName}</p>{/if}
+							{#if $errors.firstName}<p class="mt-1 text-sm text-red-500">
+									{$errors.firstName}
+								</p>{/if}
 						</div>
 						<div class="space-y-2">
 							<Label for="lastName">Last name</Label>
@@ -84,9 +87,27 @@
 				</p>
 			</CardContent>
 			<CardFooter>
-				<form method="POST" action="/account/delete">
-					<Button variant="destructive" type="submit">Delete Account</Button>
-				</form>
+				<Dialog.Root>
+					<Dialog.Trigger><Button variant="destructive">Delete Account</Button></Dialog.Trigger>
+					<Dialog.Content>
+						<Dialog.Header>
+							<Dialog.Title>Are you sure absolutely sure?</Dialog.Title>
+							<Dialog.Description>
+								This action cannot be undone. This will permanently delete your account and remove
+								your data from our servers.
+							</Dialog.Description>
+						</Dialog.Header>
+						<Dialog.Footer>
+							<div class="flex justify-start">
+								<Dialog.Close asChild>
+									<form method="POST" action="/account/delete">
+										<Button variant="destructive" type="submit">Delete Account</Button>
+									</form>
+								</Dialog.Close>
+							</div>
+						</Dialog.Footer>
+					</Dialog.Content>
+				</Dialog.Root>
 			</CardFooter>
 		</Card>
 	</div>
