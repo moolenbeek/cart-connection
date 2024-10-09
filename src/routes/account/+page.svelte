@@ -98,13 +98,11 @@
 							</Dialog.Description>
 						</Dialog.Header>
 						<Dialog.Footer>
-							<div class="flex justify-start">
-								<Dialog.Close asChild>
-									<form method="POST" action="/account/delete">
-										<Button variant="destructive" type="submit">Delete Account</Button>
-									</form>
-								</Dialog.Close>
-							</div>
+							<Dialog.Close asChild>
+								<form method="POST" action="/account/delete">
+									<Button variant="destructive" type="submit">Delete Account</Button>
+								</form>
+							</Dialog.Close>
 						</Dialog.Footer>
 					</Dialog.Content>
 				</Dialog.Root>
