@@ -4,12 +4,6 @@
 	import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "$lib/components/ui/card";
 	import { Input } from "$lib/components/ui/input";
 	import { Label } from "$lib/components/ui/label";
-	import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "$lib/components/ui/select";
-	import { Switch } from "$lib/components/ui/switch";
-	import { Separator } from "$lib/components/ui/separator";
-	import { Avatar, AvatarFallback, AvatarImage } from "$lib/components/ui/avatar";
-	
-	let selectedLanguage = 'en';
 </script>
   
   <div class="container mx-auto py-10">
@@ -52,7 +46,9 @@
 		  </p>
 		</CardContent>
 		<CardFooter>
-		  <Button variant="destructive">Delete Account</Button>
+		  <form method="POST" action="/account/delete">
+			<Button variant="destructive" type="submit">Delete Account</Button>
+		  </form>
 		</CardFooter>
 	  </Card>
 	</div>

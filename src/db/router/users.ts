@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import db from "../index";
-import { userTable } from "../schema";
+import { userTable, sessionTable } from "../schema";
 import type { User } from "../schema";
 
 export const getUserByEmail = async (email: string) => {
@@ -33,4 +33,9 @@ export const getUserByToken = async (token: string) => {
 export const updateUser = async (user: User) => {
 	const result = await db.update(userTable).set(user).where(eq(userTable.id, user.id));
 	return result;
+};
+
+export const deleteUser = async (userId: string) => {
+	await db.delete(sessionTable).where(eq(sessionTable.userId, userId));
+	await db.delete(userTable).where(eq(userTable.id, userId));
 };
