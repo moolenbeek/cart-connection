@@ -60,7 +60,7 @@
 			  </TableCell>
 			  <TableCell>${(item.price * item.quantity).toFixed(2)}</TableCell>
 			  <TableCell>
-				<Button variant="ghost" size="icon" on:click={() => removeItem(item.id)}>
+				<Button variant="destructive" size="icon" on:click={() => removeItem(item.id)}>
 				  <Trash2 class="h-4 w-4" />
 				</Button>
 			  </TableCell>
