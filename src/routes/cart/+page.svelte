@@ -54,7 +54,7 @@
 			  <TableCell>
 				<div class="flex items-center space-x-2">
 				  <Button variant="outline" size="icon" on:click={() => updateQuantity(item.id, item.quantity - 1)}>-</Button>
-				  <Input type="number" value={item.quantity} min="1" class="w-16 text-center" on:input={(e) => updateQuantity(item.id, parseInt(e.target.value))} />
+				  <Input type="number" value={item.quantity} min="1" class="w-16 text-center" on:input={(e) => e.target instanceof HTMLInputElement && updateQuantity(item.id, parseInt(e.target.value))} />
 				  <Button variant="outline" size="icon" on:click={() => updateQuantity(item.id, item.quantity + 1)}>+</Button>
 				</div>
 			  </TableCell>
