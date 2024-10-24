@@ -91,7 +91,7 @@
 					<Dialog.Trigger><Button variant="destructive">Delete Account</Button></Dialog.Trigger>
 					<Dialog.Content>
 						<Dialog.Header>
-							<Dialog.Title>Are you sure absolutely sure?</Dialog.Title>
+							<Dialog.Title>Are you absolutely sure?</Dialog.Title>
 							<Dialog.Description>
 								This action cannot be undone. This will permanently delete your account and remove
 								your data from our servers.
